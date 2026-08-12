@@ -1,0 +1,13 @@
+# Company context — may contain positioning, competitor analysis,
+# customer names, and unpublished data. Never commit.
+product-marketing.md
+product-marketing-context.md
+.agents/product-marketing.md
+.claude/product-marketing.md
+
+# Generated briefs and drafts
+briefs/
+drafts/
+
+# OS
+.DS_Store
