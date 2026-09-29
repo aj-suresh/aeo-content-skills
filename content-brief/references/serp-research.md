@@ -57,6 +57,21 @@ Once the five are mapped, ask:
 
 If the top 5 are near-identical, that's a real signal: either the topic is genuinely settled (find a different topic) or nobody has done the work yet (a large opening). The coverage map tells you which.
 
+## Reference URLs the user supplied
+
+If the user gave reference pages ("see how this one is written"), fetch them whether or not they rank:
+
+- If one ranks in the top 5, it's already a row in the coverage map.
+- If it doesn't, note it separately as a **style or structure reference**: what specifically is worth imitating (definition-first, direct sentences, how a section is laid out) and what isn't. Style, not phrasing — the brief should never tell a writer to reproduce another page's text or section order wholesale.
+
+## Keyword data
+
+If a keyword-research tool is connected in the session (Semrush, Ahrefs, or similar), use it for the keyword cluster and SERP data, and say which tool the numbers came from. If not, don't quote search volumes or difficulty scores you can't source — a cluster without volumes is fine; a cluster with invented volumes is not. Whatever the source, dedupe the cluster and sort it into primary / secondary / related.
+
+## Comparison and roundup queries
+
+When the SERP is vendor roundups, the coverage map needs a second layer. For each vendor you plan to name, fetch **that vendor's own** features and pricing pages, and record the URL and date. Claims about a competitor come from the competitor's page, not from another roundup's description of it.
+
 ## Also Worth Checking
 
 - **Is there an AI Overview for this query?** If yes, note which sources it pulls from — that's the citation target, and it's often not the #1 result.

@@ -22,12 +22,19 @@ These two skills are built around gates that catch that before it becomes a draf
 Takes a keyword through seven steps:
 
 1. **Cannibalization check** — do you already have a page targeting this? Two pages fighting over one query is the most common self-inflicted SEO wound, and it's invisible for months.
-2. **SERP research** — the question set people actually search, plus a coverage map of the top 5.
+2. **SERP research** — the question set people actually search, a coverage map of the top 5, and the content type the SERP is asking for (ideas listicle, commercial roundup, ranked list, explainer).
 3. **Confirmation gate** — you review and correct the research before any structure gets built.
-4. **The answer block** — the 100–150 words at the top of the page that AI Overviews extract. Written out, not described.
-5. **The structure** — search questions mapped to H2s, deduped and intent-filtered. Every section has to stand alone, because LLMs cite passages, not pages.
+4. **The answer block** — the two-paragraph, ~120–160-word intro that AI Overviews extract, with keyword placement planned. Written out, not described.
+5. **The structure** — a blueprint for the content type, with search questions mapped to H2s, deduped and intent-filtered. Every section has to stand alone, because LLMs cite passages, not pages. Each section gets direction (named items, not "cover best practices"), a word budget, and a citation slot; the count in the title has to match the count in the outline.
 6. **The edge gate** — see below.
-7. **Write** — brief file with the core fields, H2 outline with citation slots, internal linking plan, and schema spec.
+7. **Write** — brief file with the core fields, keyword cluster, H1 / meta title / meta description options, H2 outline with direction and citation slots, a brand section, FAQs, internal linking plan, and schema spec.
+
+### Built for real briefs
+
+- **Bring your own outline.** Pre-set outlines, keyword clusters, reference URLs, and word counts are treated as constraints. The skill reconciles them (a "12 ideas" title over 25 seeded bullets, a 1,000-word target for ten entries) instead of overwriting or silently accepting them.
+- **Page-type blueprints.** Ideas listicles, commercial roundups ("best X software"), and ranked lists each get their own shape and rules — see `references/content-types.md`.
+- **Real examples only.** List items carry a named, sourced example, plus a note of what the source *didn't* report so the writer doesn't fill the gap with a number.
+- **A brand section that stays honest.** Every product claim traces to a URL you provided, proof points quote the source's figure exactly, and roundups that include your own product disclose it and require a limitation on every entry — see `references/brand-integration.md`.
 
 ### The edge gate
 
@@ -119,7 +126,7 @@ audit https://example.com/blog/inventory-turnover before I republish it
 
 ### Optional: skip the questions
 
-`content-brief` needs four things — your product in one sentence, your reader, your competitors, and your proprietary assets. It asks for whatever it doesn't have.
+`content-brief` needs six things — your product in one sentence, your reader, your competitors, your proprietary assets (data, frameworks, case studies), your ground-truth product URLs and CTA destination, and your voice (tone and POV). It asks for whatever it doesn't have.
 
 To stop it asking every run, put them in `.agents/product-marketing.md` (or `.claude/product-marketing.md`, or `~/.agents/product-marketing.md` for a global default). This is a shared convention — several other skills read the same file.
 
@@ -137,9 +144,11 @@ The confirmation gate exists for this. For a keyword that matters, run the searc
 content-brief/
 ├── SKILL.md
 └── references/
-    ├── brief-template.md    # output format + field notes
-    ├── edge-gate.md         # the four valid edges, with pass/fail examples
-    └── serp-research.md     # research method, filters, coverage map
+    ├── brief-template.md      # output format + field notes
+    ├── content-types.md       # blueprints: ideas listicle, roundup, ranked list; sourcing examples
+    ├── brand-integration.md   # ground truth, brand section, proof points, CTA by funnel stage, voice
+    ├── edge-gate.md           # the four valid edges, with pass/fail examples per page type
+    └── serp-research.md       # research method, filters, coverage map
 
 pre-publish-check/
 ├── SKILL.md

@@ -52,6 +52,16 @@ The thing every top result mentions in one line and none explain.
 
 **Test:** can you point at the specific sentence in a competitor's page that this expands? If you can't cite the one-liner you're deepening, you haven't found the gap.
 
+## Edges on Common Page Types
+
+The edge is different for each shape of page. A blueprint from [content-types.md](content-types.md) is not an edge on its own — every ideas listicle has a list, every roundup has a table.
+
+| Page type | Fails | Passes |
+|---|---|---|
+| **Ideas listicle** | "12 more ideas than the top result" — count isn't an edge | "Every idea is paired with a named organization that ran it, with what the source did and didn't report. The top 5 list ideas; none show them being run." *(Deeper subtopic — test: point to the top-5 pages that list ideas with no evidence anyone ran them.)* |
+| **Commercial roundup** | "Covers more platforms" | "Evaluated on one criterion the generic roundups skip — for teams that must sync event data back to a specific CRM. The ranking changes." *(Specific ICP — test: does the recommended order differ from the generic roundup's? If not, it's a re-skin.)* |
+| **Ranked list** | "The top 10, updated for this year" — recency is rejected below | "A takeaways section for {practitioner ICP} that turns the ranking into decisions, plus how the metric is counted and why sources disagree." *(Specific ICP + deeper subtopic — pick one.)* |
+
 ## The Forcing Sentence
 
 Complete it, out loud, with no hedging:
