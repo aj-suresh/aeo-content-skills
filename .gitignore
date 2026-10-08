@@ -11,3 +11,7 @@ drafts/
 
 # OS
 .DS_Store
+
+# internal-linking: your own site list and patterns stay local
+internal-linking/config/sites.md
+internal-linking/config/patterns.json

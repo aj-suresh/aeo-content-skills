@@ -1,6 +1,6 @@
 # AEO Content Skills
 
-Two agent skills for writing content that ranks on Google **and** gets cited by AI Overviews, ChatGPT, Perplexity, and Claude.
+Three agent skills for writing content that ranks on Google **and** gets cited by AI Overviews, ChatGPT, Perplexity, and Claude.
 
 Compatible with Claude Code, Claude Cowork, Codex, Cursor, and other [agentskills.io](https://agentskills.io)-compatible agents.
 
@@ -8,12 +8,13 @@ Compatible with Claude Code, Claude Cowork, Codex, Cursor, and other [agentskill
 |---|---|---|
 | **`content-brief`** | A keyword | A brief a writer or an agent can execute against |
 | **`pre-publish-check`** | A finished draft | Pass/fail on five checks, with specific fixes |
+| **`internal-linking`** | A draft (Word / Google Doc) | A linked copy of the draft, plus the existing pages that should link to it |
 
 ## Why these exist
 
 The failure mode of AI-assisted content isn't bad writing. It's *competent, well-structured, entirely redundant* writing — pages that read fine and add nothing to what already ranks. Those pages don't rank, don't get cited, and cost real money to produce.
 
-These two skills are built around gates that catch that before it becomes a draft, and before a draft becomes a published page.
+These skills are built around gates that catch that before it becomes a draft, and before a draft becomes a published page.
 
 ---
 
@@ -86,6 +87,38 @@ If a brief exists, the audit also checks the draft against it. A declared-but-un
 
 ---
 
+## `internal-linking`
+
+Adds internal links to a draft before it goes live, in both directions.
+
+1. **Inventory**: reads your sitemap and fetches every page's title, headings and text. It drops translated copies, thank-you pages, tag archives, and noindex or canonicalised pages, then caches the result for a week.
+2. **Shortlist**: scores every page against the draft. For each candidate it names the paragraph where a link fits and the phrases already in that paragraph that would make a natural anchor.
+3. **Search Console** (optional): checks which page Google already associates with each concept, prioritises pages sitting at positions 5–20, and flags cannibalization when an existing page already ranks for the draft's keyword.
+4. **Insert**: writes real hyperlinks into a *copy* of the .docx. Bold, italics and fonts are kept, the original is never touched, and every link is verified afterwards.
+5. **Inbound plan**: the 3–6 existing pages that should link to the new post, each with the exact sentence to edit and the anchor inside it.
+
+Inbound is the half everyone forgets, and it's what gets a new post crawled and ranked.
+
+### Judgment, not a quota
+
+The defaults are about 1 link per 150–250 words, one per paragraph, each URL once, none in headings or the opening sentence, and 1–3 commercial pages scaled to funnel stage. They're stated as defaults with reasons, and writer instructions override them. The skill asks for those instructions up front: sites in scope, target keyword, must-link pages, pages to avoid.
+
+Anchors come from the writer's own words. If an important link has no natural anchor, the skill proposes wording in the report and leaves the prose alone.
+
+When a site has five posts on one topic, it links the strongest one rather than all five.
+
+### Multi-site companies
+
+If you run sister brands, list them in `config/sites.md` with the topics each one owns. The skill only links across brands when the draft really covers that brand's topic, and labels those links so the writer sees them.
+
+### Setup
+
+Copy `internal-linking/config/sites.example.md` to `config/sites.md` and `patterns.example.json` to `patterns.json`, then fill in your sites, Search Console properties and money-page paths. Both files are gitignored. Without them, the skill asks for your site URL each run.
+
+The first run creates a small venv with `python-docx` in `~/.cache/internal-linking/`. Google Docs work through a .docx round trip: download, link, upload. Hyperlinks survive the conversion.
+
+---
+
 ## Install
 
 Clone anywhere, then symlink into your agent's skills directory.
@@ -97,6 +130,7 @@ git clone https://github.com/aj-suresh/aeo-content-skills.git
 cd aeo-content-skills
 ln -sfn "$PWD/content-brief" ~/.claude/skills/content-brief
 ln -sfn "$PWD/pre-publish-check" ~/.claude/skills/pre-publish-check
+ln -sfn "$PWD/internal-linking" ~/.claude/skills/internal-linking
 ```
 
 **Codex / `.agents` convention:**
@@ -104,13 +138,14 @@ ln -sfn "$PWD/pre-publish-check" ~/.claude/skills/pre-publish-check
 ```bash
 ln -sfn "$PWD/content-brief" ~/.agents/skills/content-brief
 ln -sfn "$PWD/pre-publish-check" ~/.agents/skills/pre-publish-check
+ln -sfn "$PWD/internal-linking" ~/.agents/skills/internal-linking
 ```
 
 Symlinking rather than copying means editing the repo updates the live skill.
 
 ## Use
 
-No configuration required — both skills ask for what they need.
+No configuration required. Each skill asks for what it needs.
 
 ```
 write me a content brief for "inventory turnover ratio"
@@ -122,6 +157,10 @@ run pre-publish-check on drafts/inventory-turnover.md
 
 ```
 audit https://example.com/blog/inventory-turnover before I republish it
+```
+
+```
+add internal links to drafts/inventory-turnover.docx and tell me which posts should link to it
 ```
 
 ### Optional: skip the questions
@@ -154,6 +193,20 @@ pre-publish-check/
 ├── SKILL.md
 └── references/
     └── check-rubrics.md     # worked pass/fail examples per check
+
+internal-linking/
+├── SKILL.md
+├── config/
+│   ├── sites.example.md       # sites, Search Console properties, topic ownership, house rules
+│   └── patterns.example.json  # money-page and exclusion regexes per site
+├── references/
+│   ├── linking-rules.md       # density, placement, anchors, sister sites, cannibalization, examples
+│   └── report-template.md
+└── scripts/
+    ├── inventory.py           # sitemap crawl + page cache (stdlib)
+    ├── candidates.py          # outbound/inbound shortlist (stdlib)
+    ├── docx_links.py          # extract / insert / verify hyperlinks in .docx
+    └── run.sh                 # runs docx_links.py in a private venv
 ```
 
 ## License
