@@ -99,6 +99,15 @@ def cmd_inspect(url):
             m = re.search(r"href=[\"']([^\"']+)", tag, re.I)
             print("Canonical:", m.group(1) if m else "(no href)")
     print("H1:", [strip_tags(h) for h in re.findall(r"<h1[^>]*>(.*?)</h1>", html, re.S | re.I)][:2])
+    alts = [(re.search(r"hreflang=[\"']([^\"']+)", t, re.I), re.search(r"href=[\"']([^\"']+)", t, re.I))
+            for t in re.findall(r"<link\b[^>]*rel=[\"']alternate[\"'][^>]*>", html, re.I)]
+    alts = [(a.group(1), b.group(1)) for a, b in alts if a and b]
+    if alts:
+        print("hreflang siblings (each has its own page and its own schema):",
+              ", ".join(lang for lang, _ in alts))
+    article = re.search(r"<article\b.*?</article>", html, re.S | re.I)
+    ids = re.findall(r"<h[23][^>]*\sid=[\"']([^\"']+)", article.group(0) if article else html, re.I)
+    print("Heading ids in the article (first 4):", ids[:4] or "none; headings carry no ids")
 
     body = re.sub(r"<(script|style)\b.*?</\1>", " ", html, flags=re.S | re.I)
     text = strip_tags(body)
