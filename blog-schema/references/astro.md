@@ -78,6 +78,9 @@ as the site's `trailingSlash` setting. Opposite directions create a redirect loo
 
 ## 5. Heading ids for ItemList fragments
 
+If the site has translations, key `faqs` and `alternatives` per locale and emit the markup only
+on the page whose text matches. A Spanish page must not carry English FAQ answers.
+
 Markdown headings get ids from `github-slugger` by default. A long heading makes a long id. For
 short fragments, write the heading as HTML (`<h3 id="acme-boards">...</h3>`) or add a remark plugin
 that reads `{#acme-boards}` suffixes. Then build the ItemList `url` from the same `id` field.

@@ -76,7 +76,7 @@ python3 scripts/schema_check.py inspect <url>
 ```
 
 It prints the canonical, the redirect behaviour of the trailing-slash twin, the visible dates,
-and every JSON-LD node with its `@id`. Three findings change your plan:
+and every JSON-LD node with its `@id`. Five findings change your plan:
 
 1. **A graph already exists.** Extend it. Reuse its `@id` values, add only the missing nodes,
    update values that changed, and never emit a second `BlogPosting` or `Organization`.
@@ -84,6 +84,11 @@ and every JSON-LD node with its `@id`. Three findings change your plan:
    a content plan that redirects the other way creates a loop.
 3. **Nodes without an `@id`**, such as a floating Person. Give them one so nodes can reference
    each other.
+4. **hreflang siblings exist.** Each translated page has its own text and its own graph. Scope
+   the new markup to the one URL you were given, and tell the user the other languages still
+   describe the old article until someone retranslates them.
+5. **Headings already carry ids.** The site generates them from the heading text, so a long
+   heading gives a long id. Build ItemList links from the real ids, or leave the links out.
 
 For a post that is not live yet, inspect a published sibling to learn the site's `@id` style,
 organization values and author pattern.
