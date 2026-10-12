@@ -1,6 +1,6 @@
 # AEO Content Skills
 
-Three agent skills for writing content that ranks on Google **and** gets cited by AI Overviews, ChatGPT, Perplexity, and Claude.
+Four agent skills for writing content that ranks on Google **and** gets cited by AI Overviews, ChatGPT, Perplexity, and Claude.
 
 Compatible with Claude Code, Claude Cowork, Codex, Cursor, and other [agentskills.io](https://agentskills.io)-compatible agents.
 
@@ -9,6 +9,7 @@ Compatible with Claude Code, Claude Cowork, Codex, Cursor, and other [agentskill
 | **`content-brief`** | A keyword | A brief a writer or an agent can execute against |
 | **`pre-publish-check`** | A finished draft | Pass/fail on five checks, with specific fixes |
 | **`internal-linking`** | A draft (Word / Google Doc) | A linked copy of the draft, plus the existing pages that should link to it |
+| **`blog-schema`** | A brief or a draft | One validated JSON-LD `@graph` that matches the visible page, plus a report of what ships, what was skipped and what is missing |
 
 ## Why these exist
 
@@ -119,6 +120,22 @@ The first run creates a small venv with `python-docx` in `~/.cache/internal-link
 
 ---
 
+## `blog-schema`
+
+Turns a brief's schema spec, or a finished draft, into JSON-LD for the post. It is the skill `content-brief` hands off to.
+
+1. **Collects the page facts**: URL as served, H1, dates, byline, hero image, the visible FAQ, and the list entries the page is built around.
+2. **Inspects the live site** (`scripts/schema_check.py inspect <url>`): the canonical, how the trailing-slash twin redirects, and every JSON-LD node already emitted. If the site already builds a graph, the skill extends it and reuses its `@id` values instead of adding a second `BlogPosting`.
+3. **Picks the types the page earns** and records each skip with a reason. FAQPage and ItemList are marked machine-readable only, because Google ended FAQ rich results on 2026-05-07 and its carousel covers only courses, movies, recipes and restaurants.
+4. **Builds one `@graph`** and **validates it** (`scripts/schema_check.py validate`). With `--page` it confirms that every FAQ question and answer, list entry, headline and date appears in the visible text, and it blocks Review, AggregateRating, Product and SoftwareApplication on roundups.
+5. **Reports** what ships, what changed on the live page, where the brief and the draft disagree, and what it still needs from you.
+
+It never invents an author, date, image or logo. Gaps become `TODO_` placeholders, and the validator fails until they are filled. A brief on its own produces a PROVISIONAL result, since brief answers are directions and not final text.
+
+`references/astro.md` covers shipping the graph from an Astro site. The checker uses only the Python standard library.
+
+---
+
 ## Install
 
 Clone anywhere, then symlink into your agent's skills directory.
@@ -131,6 +148,7 @@ cd aeo-content-skills
 ln -sfn "$PWD/content-brief" ~/.claude/skills/content-brief
 ln -sfn "$PWD/pre-publish-check" ~/.claude/skills/pre-publish-check
 ln -sfn "$PWD/internal-linking" ~/.claude/skills/internal-linking
+ln -sfn "$PWD/blog-schema" ~/.claude/skills/blog-schema
 ```
 
 **Codex / `.agents` convention:**
@@ -139,6 +157,7 @@ ln -sfn "$PWD/internal-linking" ~/.claude/skills/internal-linking
 ln -sfn "$PWD/content-brief" ~/.agents/skills/content-brief
 ln -sfn "$PWD/pre-publish-check" ~/.agents/skills/pre-publish-check
 ln -sfn "$PWD/internal-linking" ~/.agents/skills/internal-linking
+ln -sfn "$PWD/blog-schema" ~/.agents/skills/blog-schema
 ```
 
 Symlinking rather than copying means editing the repo updates the live skill.
@@ -207,6 +226,15 @@ internal-linking/
     ├── candidates.py          # outbound/inbound shortlist (stdlib)
     ├── docx_links.py          # extract / insert / verify hyperlinks in .docx
     └── run.sh                 # runs docx_links.py in a private venv
+
+blog-schema/
+├── SKILL.md
+├── references/
+│   ├── type-selection.md      # which types to ship or skip, with Google's current status
+│   ├── jsonld-patterns.md     # templates and matching rules per type
+│   └── astro.md               # emitting the graph from Astro, canonical URLs, heading ids
+└── scripts/
+    └── schema_check.py        # inspect a live page; validate JSON-LD against the visible text (stdlib)
 ```
 
 ## License
