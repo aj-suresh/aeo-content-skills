@@ -31,12 +31,16 @@ Takes a keyword through seven steps:
 6. **The edge gate** — see below.
 7. **Write** — brief file with the core fields, keyword cluster, H1 / meta title / meta description options, H2 outline with direction and citation slots, a brand section, FAQs, internal linking plan, and schema spec.
 
+The brief follows a fixed order, so every brief reads the same way to the writer: a **brief at a glance** summary; core fields (intent, SERP context, the decision the reader is making, who/how/why); a **keyword data table** with a "what this changes" note; **Option A / Option B** titles with one marked recommended; the written answer block; an **outline-at-a-glance table** with word budgets and count checks; a **fact bank**; **entry research** for roundups; the brand section with a disclosure line and a don't-claim list; FAQs; the coverage map with your own pages, an **AI answer snapshot** and a cannibalization decision with its fallback; internal links with exact edit text; schema; a pre-publish checklist; open items; and sources.
+
 ### Built for real briefs
 
 - **Bring your own outline.** Pre-set outlines, keyword clusters, reference URLs, and word counts are treated as constraints. The skill reconciles them (a "12 ideas" title over 25 seeded bullets, a 1,000-word target for ten entries) instead of overwriting or silently accepting them.
 - **Page-type blueprints.** Ideas listicles, commercial roundups ("best X software"), and ranked lists each get their own shape and rules — see `references/content-types.md`.
 - **Real examples only.** List items carry a named, sourced example, plus a note of what the source *didn't* report so the writer doesn't fill the gap with a number.
 - **A brand section that stays honest.** Every product claim traces to a URL you provided, proof points quote the source's figure exactly, and roundups that include your own product disclose it and require a limitation on every entry — see `references/brand-integration.md`.
+- **Entry research for roundups and "alternatives to X" pages.** One verified-facts row per entry from the vendor's own pages, with dated pricing, limitations marked as inference when they come from absence, vendor-reported results attributed, and a re-check list. "Alternatives" pages also get a neutral baseline on the incumbent and a "when to stay" section — see `references/entry-research.md`.
+- **Cannibalization with a fallback.** When a comparison or pillar page already owns a phrase, the brief states which phrase each page owns, which anchors are off limits, and which page merges into which (with a 301) if both end up ranking.
 
 ### The edge gate
 
@@ -182,6 +186,25 @@ audit https://example.com/blog/inventory-turnover before I republish it
 add internal links to drafts/inventory-turnover.docx and tell me which posts should link to it
 ```
 
+### What to give it for a better brief
+
+A keyword alone gets a sound structure. These inputs get a specific brief:
+
+| Give it | Why |
+|---|---|
+| The real People Also Ask box, pasted and dated | Web search only approximates it |
+| What ChatGPT, Perplexity and Google's AI Overview say now, with their sources | Shows the citation target and where the answer falls short |
+| Search Console data (connected or exported) | Finds cannibalization and the best internal-link targets |
+| Keyword data (Semrush or Ahrefs) | Real volumes, difficulty and SERP features |
+| Questions from sales calls, support tickets and communities | The H2s the top 5 skip |
+| A named author or expert, and what only they know | People-first content needs a real author and first-hand knowledge |
+| The decision the reader is making, and the outcome | Gives the page a job |
+| Existing related pages (pillar, landing page, siblings) | Decides who owns which phrase |
+| Claims to avoid, and the exact terms to use | A draft inherits what the brief leaves open |
+| Success metric, refresh owner and date | A page with no owner goes stale |
+
+The full tiered list, a ten-line intake template, and the sources behind these recommendations are in `content-brief/references/inputs.md`.
+
 ### Optional: skip the questions
 
 `content-brief` needs six things — your product in one sentence, your reader, your competitors, your proprietary assets (data, frameworks, case studies), your ground-truth product URLs and CTA destination, and your voice (tone and POV). It asks for whatever it doesn't have.
@@ -202,7 +225,9 @@ The confirmation gate exists for this. For a keyword that matters, run the searc
 content-brief/
 ├── SKILL.md
 └── references/
-    ├── brief-template.md      # output format + field notes
+    ├── brief-template.md      # output format, section order + field notes
+    ├── inputs.md              # what to give the skill: tiered inputs, intake list, sources
+    ├── entry-research.md      # verified-facts table for roundups and "alternatives to X" pages
     ├── content-types.md       # blueprints: ideas listicle, roundup, ranked list; sourcing examples
     ├── brand-integration.md   # ground truth, brand section, proof points, CTA by funnel stage, voice
     ├── edge-gate.md           # the four valid edges, with pass/fail examples per page type

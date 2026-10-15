@@ -47,7 +47,7 @@ Every type still goes through the edge gate. A blueprint is a shape, not an edge
 
 **Shape**
 
-1. Answer block — names the top pick *per situation*, not one winner for everyone
+1. Answer block — names the top pick *per situation*, not one winner for everyone. Optionally follow it with an **at-a-glance table** (one row per entry: best for, the criteria you judged on, published pricing with its date) as the first extractable element.
 2. **What is {category}** — dictionary-style definition, 2–3 sentences, no fluff. Then 5–10 concrete use cases as a list, then one paragraph on how it differs from the adjacent general-purpose category.
 3. **Essential features** — one H3 per feature. Each is 1–2 sentences: what the software should do, and why it matters. Flag the single most important feature and say why. Include modern formats (hybrid/virtual, mobile) if the SERP does.
 4. **The platforms** — one H3 per product, titled `{n}. {Product} — Best for {specific situation}`. Each entry: what it is, what it does well, **one real limitation**, who it fits.
@@ -57,6 +57,10 @@ Every type still goes through the edge gate. A blueprint is a shape, not an edge
 8. Brand section
 9. FAQs
 
+**Entry research.** Every entry in a roundup comes from the vendor's own pages. The brief carries a verified-facts table, with inference labels, dated pricing and a re-check list. See [entry-research.md](entry-research.md).
+
+**For "alternatives to {incumbent}" pages**, add two things: a short neutral block on what the incumbent offers and costs (taken from its own pages, no criticism), and a section on **when the incumbent is still the right choice**. Both make the page more credible, and the second is rare in the top results.
+
 **Rules that keep a roundup honest** (and citable):
 
 - **"Best for" must be narrow enough to be false for someone.** "Best for teams that run auctions" is a claim. "Best overall" is filler.
@@ -65,6 +69,9 @@ Every type still goes through the edge gate. A blueprint is a shape, not an edge
 - **If the brand is one of the entries, say so.** State the evaluation criteria up front, give the brand's entry the same anatomy (including a limitation), and don't let it be the only entry with a proof point.
 - **The use-case table must be supported by the prose.** A platform can't be "best for" a row the entries don't back up. Check every table cell against its H3.
 - **Match the table's names to the H3s exactly.** LLMs match strings.
+- **Don't criticise a competitor you have no source on.** A limitation comes from the vendor's page, or from what it leaves out, labelled as inference.
+- **Attribute vendor-reported results.** "Reported by {vendor}" in the text, never a plain fact in a table cell.
+- **If the page shares a phrase with an existing comparison page**, decide which page owns it and keep that phrase out of this page's headings and anchors. See Step 1 in `SKILL.md`.
 
 **Edge candidates** — specific ICP where the *ranking changes* (a roundup for teams that must sync with a specific CRM recommends different tools than a generic one), deeper subtopic (the feature every roundup lists in one line), named framework (the buying checklist, if it's actually a model).
 

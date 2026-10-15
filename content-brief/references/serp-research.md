@@ -70,7 +70,32 @@ If a keyword-research tool is connected in the session (Semrush, Ahrefs, or simi
 
 ## Comparison and roundup queries
 
-When the SERP is vendor roundups, the coverage map needs a second layer. For each vendor you plan to name, fetch **that vendor's own** features and pricing pages, and record the URL and date. Claims about a competitor come from the competitor's page, not from another roundup's description of it.
+When the SERP is vendor roundups, the coverage map needs a second layer. For each vendor you plan to name, fetch **that vendor's own** features and pricing pages, and record the URL and date. Claims about a competitor come from the competitor's page, not from another roundup's description of it. The method, table and labels for this layer are in [entry-research.md](entry-research.md).
+
+Read the SERP for what is *not* there. If the "alternatives" results are auto-generated directories, a vendor's own pages, or lists of unrelated products, there is no editorial roundup to beat, and the gap is the whole format: stated criteria, dated pricing and a limitation on every entry. Say that at the gate, and note which pages you could not open.
+
+## The AI answer snapshot
+
+For the primary query, record what AI assistants currently say. This is where an AEO brief finds its gap.
+
+1. Run the query in Google (note whether an AI Overview appears and which sources it cites) and, where the session allows it, in ChatGPT and Perplexity.
+2. For each, record: the answer in one line, the sources it cites, and where the answer falls short (outdated, generic, missing a segment, no numbers).
+3. Date the capture. AI answers change faster than organic rankings.
+4. A cited source that is not in the organic top 5 is a second competitor. Add it to the coverage map.
+
+If you cannot run the assistants, write `[NEEDS: AI answer snapshot]` and ask the user to paste the answers and their sources. Do not infer what an assistant would say.
+
+The snapshot shows where a page can add value, and it does not predict citations. Treat any statistic about citation rates from a vendor blog as unverified until you have read the original study.
+
+## Your own pages and Search Console
+
+If Search Console is connected, or the user supplied an export, add the user's own pages to the coverage map:
+
+- Pages that already rank for the keyword or near-synonyms, with position, impressions and the date range.
+- Which phrase each page owns. This decides the cannibalization call in Step 1 and the anchor text off-limits on the new page.
+- Pages sitting at positions 5 to 20 for related topics. They are the best internal-link targets.
+
+State the date range with every figure. Without Search Console, say so and do not quote positions.
 
 ## Also Worth Checking
 
@@ -83,8 +108,9 @@ When the SERP is vendor roundups, the coverage map needs a second layer. For eac
 Keep it scannable. Two tables and a claim:
 
 1. **Question set** — question, intent read, keep/drop with reason
-2. **Coverage map** — the table above, five rows
-3. **Gaps I think are real** — 1–3 candidates, stated as claims the user can push back on
+2. **Coverage map** — the table above, five rows, with the user's own ranking pages added when known
+3. **AI answer snapshot** — what AI assistants say now, their sources, where they fall short (or the line saying it could not be captured)
+4. **Gaps I think are real** — 1–3 candidates, stated as claims the user can push back on
 
 Then ask for corrections, and flag explicitly that pasting the real PAA box will improve the structure.
 

@@ -31,6 +31,18 @@ Four parts, in this order, in 150–250 words total:
 3. **One proof point, or none** — a named customer, a real number, a cited case-study URL. See below. If you don't have one, cut this part; don't soften it into "customers see great results."
 4. **One CTA** — a single action with its URL.
 
+### The argument, the mapping and the don't-claim list
+
+Write three more things into the brand section's plan:
+
+- **The argument** — one sentence: why the product answers the problems this page raised ("one subscription covers every lab course in a department, so IT runs one platform instead of three"). If you cannot state it in one sentence the section is a feature dump.
+- **Problem to solution mapping** — 3 to 5 pairs, in the order the page raised the problems. Each pairs a problem with the capability that answers it.
+- **Don't claim** — a written list of what the draft must not say: numbers with no published baseline, capabilities the product team has not confirmed (`[VERIFY with product team]`), outcomes with no source, anything legal or compliance has restricted. A draft inherits whatever the brief leaves open.
+
+### Disclosure text
+
+When the page lists the brand, write the disclosure line into the brief and place it directly under the at-a-glance table, for example: *"{Brand} publishes this guide and is listed first. Every entry, ours included, lists its limitations, and pricing comes from each vendor's own site as of {month year}."* The brief does not leave it to the writer to decide whether to disclose.
+
 ## 4. Proof points
 
 - **Quote the figure exactly.** "3x higher participation" only if the case study says 3x. No rounding up, no rounding to a better-sounding number.
